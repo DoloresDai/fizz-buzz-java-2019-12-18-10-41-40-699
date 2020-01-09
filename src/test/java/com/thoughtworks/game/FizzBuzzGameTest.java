@@ -3,7 +3,6 @@ package com.thoughtworks.game;
 
 import org.junit.Test;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -14,25 +13,6 @@ public class FizzBuzzGameTest {
     private static final String WHIZZ = "Whizz";
     private static final String FIZZ = "Fizz";
     private static final String BUZZ = "Buzz";
-
-    @Test
-    public void should_return_itself_when_input_not_special_number_given_input_single_number_but_not_0() {
-//        given
-        List<Integer> sources = Arrays.asList(1, 2, 4, 6, 8, 9);
-        List<String> expect = sources
-                .stream()
-                .map(Object::toString)
-                .collect(toList());
-
-//        when
-        List<String> result = sources
-                .stream()
-                .map(FizzBuzzGame::fizzBuzz)
-                .collect(toList());
-
-//        then
-        assertEquals(expect, result);
-    }
 
     @Test
     public void should_return_Fizz_when_input_3() {
@@ -65,11 +45,11 @@ public class FizzBuzzGameTest {
     }
 
     @Test
-    public void should_return_itself_when_input_other_number_that_are_not_multiple_of_special_number_given_input_number_between_10_to_120() {
+    public void should_return_itself_when_input_other_number_that_are_not_multiple_of_special_number_given_input_number_between_1_to_120() {
 //        given
         List<Integer> resources = Stream
-                .iterate(10, n -> n + 1)
-                .limit(111)
+                .iterate(1, n -> n + 1)
+                .limit(120)
                 .filter(n -> !((n % 3 == 0) | (n % 5 == 0) | (n % 7 == 0)))
                 .collect(toList());
 
@@ -85,5 +65,9 @@ public class FizzBuzzGameTest {
 
 //        then
         assertEquals(expect, result);
+    }
+
+    @Test
+    public void name() {
     }
 }
