@@ -47,9 +47,7 @@ public class FizzBuzzGameTest {
     @Test
     public void should_return_itself_when_input_other_number_that_are_not_multiple_of_special_number_given_input_number_between_1_to_120() {
 //        given
-        List<Integer> resources = Stream
-                .iterate(1, n -> n + 1)
-                .limit(120)
+        List<Integer> resources = getLimitList()
                 .filter(n -> !((n % 3 == 0) | (n % 5 == 0) | (n % 7 == 0)))
                 .collect(toList());
 
@@ -68,6 +66,27 @@ public class FizzBuzzGameTest {
     }
 
     @Test
-    public void name() {
+    public void should_return_Fizz_when_input_multiple_number_of_3() {
+//        given
+        List<Integer> resources = getLimitList()
+                .filter(n -> n % 3 == 0)
+                .collect(toList());
+        List<String> expect = resources
+                .stream()
+                .map(n -> "Fizz")
+                .collect(toList());
+
+//        when
+        List<String> result = resources
+                .stream()
+                .map(FizzBuzzGame::fizzBuzz)
+                .collect(toList());
+
+//        then
+        assertEquals(expect, result);
+    }
+
+    private Stream<Integer> getLimitList() {
+        return Stream.iterate(1, n -> n + 1).limit(120);
     }
 }
