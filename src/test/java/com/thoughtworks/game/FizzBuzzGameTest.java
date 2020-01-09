@@ -49,4 +49,15 @@ public class FizzBuzzGameTest {
 //        then
         assertEquals(expect, result);
     }
+
+    @Test
+    public void should_return_Whizz_when_input_7() {
+//        given
+//        when
+        String expect = FizzBuzzGame.WHIZZ;
+        String result = FizzBuzzGame.fizzBuzz(7);
+
+//        then
+        assertEquals(expect, result);
+    }
 }
