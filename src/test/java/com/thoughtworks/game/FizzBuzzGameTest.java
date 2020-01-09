@@ -6,42 +6,21 @@ import org.junit.Test;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static com.thoughtworks.game.FizzBuzzGame.answer;
+import static com.thoughtworks.game.FizzBuzzGame.specialNumber;
 import static java.util.stream.Collectors.toList;
 import static org.junit.Assert.assertEquals;
 
 public class FizzBuzzGameTest {
-    private static final String WHIZZ = "Whizz";
-    private static final String FIZZ = "Fizz";
-    private static final String BUZZ = "Buzz";
 
     @Test
-    public void should_return_Fizz_when_input_3() {
-//        given
-//        when
-        String result = FizzBuzzGame.fizzBuzz(3);
+    public void should_return_correct_answer_when_input_single_special_number() {
+        List<String> expect = specialNumber
+                .stream()
+                .map(FizzBuzzGame::fizzBuzz)
+                .collect(toList());
 
-//        then
-        assertEquals(FIZZ, result);
-    }
-
-    @Test
-    public void should_return_Buzz_when_input_5() {
-//        given
-//        when
-        String result = FizzBuzzGame.fizzBuzz(5);
-
-//        then
-        assertEquals(BUZZ, result);
-    }
-
-    @Test
-    public void should_return_Whizz_when_input_7() {
-//        given
-//        when
-        String result = FizzBuzzGame.fizzBuzz(7);
-
-//        then
-        assertEquals(WHIZZ, result);
+        assertEquals(expect, answer);
     }
 
     @Test
@@ -66,14 +45,24 @@ public class FizzBuzzGameTest {
     }
 
     @Test
-    public void should_return_Fizz_when_input_multiple_number_of_3() {
+    public void should_return_relatively_answer_when_input_multiple_number_of_special_number() {
 //        given
         List<Integer> resources = getLimitList()
-                .filter(n -> n % 3 == 0)
+                .filter(this::ifMultipleNumber)
                 .collect(toList());
+
         List<String> expect = resources
                 .stream()
-                .map(n -> "Fizz")
+                .map(n -> {
+                    if (n % 3 == 0) {
+                        return "Fizz";
+                    } else if (n % 5 == 0) {
+                        return "Buzz";
+                    } else if (n % 7 == 0) {
+                        return "Whizz";
+                    }
+                    return n.toString();
+                })
                 .collect(toList());
 
 //        when
@@ -84,6 +73,10 @@ public class FizzBuzzGameTest {
 
 //        then
         assertEquals(expect, result);
+    }
+
+    private boolean ifMultipleNumber(Integer number) {
+        return specialNumber.stream().anyMatch(n -> number % n == 0);
     }
 
     private Stream<Integer> getLimitList() {

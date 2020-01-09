@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 
 class FizzBuzzGame {
-    private static final List<String> answer = Arrays.asList("Fizz", "Buzz", "Whizz");
-    private static final List<Integer> specialNumber = Arrays.asList(3, 5, 7);
+    static final List<String> answer = Arrays.asList("Fizz", "Buzz", "Whizz");
+    static final List<Integer> specialNumber = Arrays.asList(3, 5, 7);
 
 
     static String fizzBuzz(Integer number) {
@@ -13,6 +13,10 @@ class FizzBuzzGame {
             return getCorrectAnswer(number);
         } else if (number % 3 == 0) {
             return "Fizz";
+        } else if (number % 5 == 0) {
+            return "Buzz";
+        } else if (number % 7 == 0) {
+            return "Whizz";
         }
         return number.toString();
     }
