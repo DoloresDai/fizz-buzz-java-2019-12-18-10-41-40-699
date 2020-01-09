@@ -1,18 +1,21 @@
 package com.thoughtworks.game;
 
+import java.util.Arrays;
+import java.util.List;
+
 class FizzBuzzGame {
-    static final String WHIZZ = "Whizz";
-    static final String FIZZ = "Fizz";
-    static final String BUZZ = "Buzz";
+    private static final List<String> answer = Arrays.asList("Fizz", "Buzz", "Whizz");
+    private static final List<Integer> specialNumber = Arrays.asList(3, 5, 7);
+
 
     static String fizzBuzz(Integer number) {
-        if (number.equals(3)) {
-            return FIZZ;
-        } else if (number.equals(5)) {
-            return BUZZ;
-        } else if (number.equals(7)) {
-            return WHIZZ;
+        if (specialNumber.contains(number)) {
+            return getCorrectAnswer(number);
         }
         return number.toString();
+    }
+
+    private static String getCorrectAnswer(Integer number) {
+        return answer.get(specialNumber.indexOf(number));
     }
 }
