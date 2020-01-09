@@ -16,21 +16,19 @@ class FizzBuzzGame {
         List<Integer> multipleList = getFilterList(isMultipleNumber(number));
         List<Integer> contain3List = getFilterList(multipleList, isContainsNumber(number, 3));
         List<Integer> contain5List = getFilterList(multipleList, isContainsNumber(number, 5));
+        List<Integer> contain7List = getFilterList(multipleList, isContainsNumber(number, 7));
 
         if (multipleList.size() > 0) {
-            if (contain3List.size() > 0) {
+            if (contain7List.size() > 0) {
+                return "Whizz";
+            } else if (contain3List.size() > 0) {
                 if (contain5List.size() > 0) {
-                    return contain5List
-                            .stream()
-                            .map(FizzBuzzGame::getCorrectAnswer)
-                            .collect(Collectors.joining());
+                    return getJoining(contain5List);
+
                 }
                 return "Fizz";
             }
-            return multipleList
-                    .stream()
-                    .map(FizzBuzzGame::getCorrectAnswer)
-                    .collect(Collectors.joining());
+            return getJoining(multipleList);
         }
         return number.toString();
     }
@@ -59,5 +57,12 @@ class FizzBuzzGame {
 
     private static String getCorrectAnswer(Integer number) {
         return answer.get(specialNumber.indexOf(number));
+    }
+
+    private static String getJoining(List<Integer> list) {
+        return list
+                .stream()
+                .map(FizzBuzzGame::getCorrectAnswer)
+                .collect(Collectors.joining());
     }
 }

@@ -64,6 +64,11 @@ public class FizzBuzzGameTest {
         assertEquals("Fizz", fizzBuzz(30));
     }
 
+    @Test
+    public void should_return_Whizz_when_input_75() {
+        assertEquals("Whizz", fizzBuzz(75));
+    }
+
     private Stream<Integer> getLimitList() {
         return Stream.iterate(1, n -> n + 1).limit(120);
     }
