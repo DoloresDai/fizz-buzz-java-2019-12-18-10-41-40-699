@@ -13,14 +13,25 @@ public class CountOffGameTest {
     @Test
     public void should_return_itself_when_input_not_special_number_given_input_single_number_but_not_0() {
 //        given
-        Integer[] sources = {1, 2, 4, 6, 8, 9};
-        List<Integer> expect = Arrays.asList(sources);
+        String[] sources = {"1", "2", "4", "6", "8", "9"};
+        List<String> expect = Arrays.asList(sources);
 
 //        when
-        List<Integer> result = expect
+        List<String> result = expect
                 .stream()
                 .map(CountOffGame::countOff)
                 .collect(toList());
+
+//        then
+        assertEquals(expect, result);
+    }
+
+    @Test
+    public void should_return_Fizz_when_input_3() {
+//        given
+//        when
+        String result = CountOffGame.countOff("3");
+        String expect = CountOffGame.FIZZ;
 
 //        then
         assertEquals(expect, result);
