@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static com.thoughtworks.game.FizzBuzzGame.*;
 import static com.thoughtworks.game.FizzBuzzGame.answer;
 import static com.thoughtworks.game.FizzBuzzGame.specialNumber;
 import static java.util.stream.Collectors.toList;
@@ -15,12 +16,12 @@ public class FizzBuzzGameTest {
 
     @Test
     public void should_return_correct_answer_when_input_single_special_number() {
-        List<String> expect = specialNumber
+        List<String> result = specialNumber
                 .stream()
                 .map(FizzBuzzGame::fizzBuzz)
                 .collect(toList());
 
-        assertEquals(expect, answer);
+        assertEquals(answer, result);
     }
 
     @Test
@@ -46,16 +47,21 @@ public class FizzBuzzGameTest {
 
     @Test
     public void should_return_relatively_answer_when_input_multiple_number_of_special_number() {
-        assertEquals("Fizz", FizzBuzzGame.fizzBuzz(9));
-        assertEquals("Buzz", FizzBuzzGame.fizzBuzz(10));
-        assertEquals("Whizz", FizzBuzzGame.fizzBuzz(14));
+        assertEquals("Fizz", fizzBuzz(9));
+        assertEquals("Buzz", fizzBuzz(10));
+        assertEquals("Whizz", fizzBuzz(14));
     }
 
     @Test
     public void should_return_combination_answer_when_input_multiple_number_of_special_numbers() {
-        assertEquals("FizzBuzz", FizzBuzzGame.fizzBuzz(15));
-        assertEquals("FizzWhizz", FizzBuzzGame.fizzBuzz(21));
-        assertEquals("BuzzWhizz", FizzBuzzGame.fizzBuzz(35));
+        assertEquals("FizzBuzz", fizzBuzz(15));
+        assertEquals("FizzWhizz", fizzBuzz(21));
+        assertEquals("BuzzWhizz", fizzBuzz(35));
+    }
+
+    @Test
+    public void should_return_Fizz_when_input_30() {
+        assertEquals("Fizz", fizzBuzz(30));
     }
 
     private Stream<Integer> getLimitList() {
