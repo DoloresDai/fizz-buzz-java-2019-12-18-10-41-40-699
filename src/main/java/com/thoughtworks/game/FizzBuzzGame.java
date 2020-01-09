@@ -2,6 +2,9 @@ package com.thoughtworks.game;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 class FizzBuzzGame {
     static final List<String> answer = Arrays.asList("Fizz", "Buzz", "Whizz");
@@ -9,14 +12,16 @@ class FizzBuzzGame {
 
 
     static String fizzBuzz(Integer number) {
-        if (specialNumber.contains(number)) {
-            return getCorrectAnswer(number);
-        } else if (number % 3 == 0) {
-            return "Fizz";
-        } else if (number % 5 == 0) {
-            return "Buzz";
-        } else if (number % 7 == 0) {
-            return "Whizz";
+        List<Integer> isMultipleNumber = specialNumber
+                .stream()
+                .filter(n -> number % n == 0)
+                .collect(toList());
+
+        if (isMultipleNumber.size() > 0) {
+            return isMultipleNumber
+                    .stream()
+                    .map(FizzBuzzGame::getCorrectAnswer)
+                    .collect(Collectors.joining());
         }
         return number.toString();
     }
@@ -24,5 +29,6 @@ class FizzBuzzGame {
     private static String getCorrectAnswer(Integer number) {
         return answer.get(specialNumber.indexOf(number));
     }
+
 
 }
